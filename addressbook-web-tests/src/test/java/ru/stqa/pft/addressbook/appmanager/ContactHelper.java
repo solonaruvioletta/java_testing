@@ -27,14 +27,6 @@ public class ContactHelper extends HelperBase {
     type(By.name("fax"), contactData.getFax());
     type(By.name("email"), contactData.getEmail());
 
-    if (!wd.findElement(By.xpath("//div[@id='content']/form/select[1]//option[11]")).isSelected()) {
-      wd.findElement(By.xpath("//div[@id='content']/form/select[1]//option[11]")).click();
-    }
-    if (!wd.findElement(By.xpath("//div[@id='content']/form/select[2]//option[4]")).isSelected()) {
-      wd.findElement(By.xpath("//div[@id='content']/form/select[2]//option[4]")).click();
-    }
-
-    type(By.name("byear"), contactData.getBirthyear());
   }
 
   public void goToMainPage() {
