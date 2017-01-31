@@ -26,7 +26,6 @@ public class ContactHelper extends HelperBase {
     type(By.name("work"), contactData.getWorkphone());
     type(By.name("fax"), contactData.getFax());
     type(By.name("email"), contactData.getEmail());
-
   }
 
   public void goToMainPage() {
@@ -36,4 +35,20 @@ public class ContactHelper extends HelperBase {
   public void enterContactInformation() {
     click(By.name("theform"));
   }
+
+  public void selectContact() { click(By.name("selected[]")); }
+
+  public void deleteSelectedContacts() {
+    click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
+  }
+
+  public void acceptContactDeletion() {
+    wd.switchTo().alert().accept();
+  }
+
+  public void initGroupModification() {
+    click(By.xpath("//tr[@class='odd']/td[8]/a/img"));
+  }
+
+  public void submitGroupModification() { click(By.xpath("//div[@id='content']/form[1]/input[22]")); }
 }
