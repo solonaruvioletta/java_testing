@@ -1,15 +1,14 @@
 package ru.stqa.pft.addressbook.appmanager;
 
-import org.eclipse.jetty.io.ClientConnectionFactory;
 import org.openqa.selenium.By;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.WebDriver;
 
 /**
  * Created by 1 on 29.01.2017.
  */
 public class NavigationHelper extends HelperBase {
 
-  public NavigationHelper(FirefoxDriver wd) {
+  public NavigationHelper(WebDriver wd) {
     super(wd);
   }
 
