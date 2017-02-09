@@ -22,6 +22,9 @@ public class NavigationHelper extends HelperBase {
   }
 
   public void goToAddNewPage() {
+    if (isElementPresent(By.name("submit"))) {
+      return;
+    }
     click(By.linkText("add new"));
   }
 
