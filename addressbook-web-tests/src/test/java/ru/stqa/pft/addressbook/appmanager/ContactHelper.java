@@ -45,7 +45,9 @@ public class ContactHelper extends HelperBase {
     click(By.name("theform"));
   }
 
-  public void selectContact() { click(By.name("selected[]")); }
+  public void selectContact() {
+    click(By.name("selected[]"));
+  }
 
   public void deleteSelectedContacts() {
     click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
@@ -59,7 +61,9 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
   }
 
-  public void submitContactModification() { click(By.xpath("//div[@id='content']/form[1]/input[22]")); }
+  public void submitContactModification() {
+    click(By.xpath("//div[@id='content']/form[1]/input[22]"));
+  }
 
   public void createContact(ContactData contact, boolean b) {
     fillContactForm(contact, b);

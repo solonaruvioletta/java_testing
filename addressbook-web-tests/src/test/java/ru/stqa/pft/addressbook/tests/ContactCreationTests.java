@@ -10,7 +10,7 @@ public class ContactCreationTests extends TestBase {
   public void testContactCreation() {
 
     app.getNavigationHelper().goToGroupPage();
-    if (! app.getGroupHelper().isThereAGroup()){
+    if (!app.getGroupHelper().isThereAGroup()) {
       app.getNavigationHelper().goToGroupPage();
       app.getGroupHelper().createGroup(new GroupData("test1", null, null));
     }
