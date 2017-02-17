@@ -57,9 +57,7 @@ public class ContactData {
 
   }
 
-  public String getId() {
-    return id;
-  }
+  public String getId() { return id; }
 
   public String getFirstname() {
     return firstname;
@@ -122,6 +120,21 @@ public class ContactData {
   }
 
   @Override
+  public String toString() {
+    return "ContactData{" +
+            "id='" + id + '\'' +
+            ", firstname='" + firstname + '\'' +
+            ", lastname='" + lastname + '\'' +
+            ", address='" + address + '\'' +
+            ", homephone='" + homephone + '\'' +
+            ", mobilephone='" + mobilephone + '\'' +
+            ", workphone='" + workphone + '\'' +
+            ", email='" + email + '\'' +
+            ", email2='" + email2 + '\'' +
+            '}';
+  }
+
+  @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
@@ -151,20 +164,5 @@ public class ContactData {
     result = 31 * result + (email != null ? email.hashCode() : 0);
     result = 31 * result + (email2 != null ? email2.hashCode() : 0);
     return result;
-  }
-
-  @Override
-  public String toString() {
-    return "ContactData{" +
-            "id='" + id + '\'' +
-            ", firstname='" + firstname + '\'' +
-            ", lastname='" + lastname + '\'' +
-            ", address='" + address + '\'' +
-            ", homephone='" + homephone + '\'' +
-            ", mobilephone='" + mobilephone + '\'' +
-            ", workphone='" + workphone + '\'' +
-            ", email='" + email + '\'' +
-            ", email2='" + email2 + '\'' +
-            '}';
   }
 }
