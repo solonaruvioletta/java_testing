@@ -21,14 +21,14 @@ public class NavigationHelper extends HelperBase {
     click(By.linkText("groups"));
   }
 
-  public void goToAddNewPage() {
+  public void addNewPage() {
     if (isElementPresent(By.name("submit"))) {
       return;
     }
     click(By.linkText("add new"));
   }
 
-  public void goToHomePage() {
+  public void homePage() {
     if (isElementPresent(By.id("maintable"))) {
       return;
     }
