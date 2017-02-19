@@ -22,7 +22,7 @@ public class ContactDeletionTests extends TestBase {
         app.group().create(new GroupData().withName("test1"));
       }
       app.goTo().addNewPage();
-      app.contact().create(new ContactData("Violetta", "Igorevna", "Solonaru", null, null, null, null, null, null, null, null, null, null, null, "test1"), true);
+      app.contact().create(new ContactData().withFirstname("Violetta").withMiddlename("Igorevna").withLastname("Solonaru").withNickname(null).withTitle(null).withCompany(null).withAddress(null).withHomephone(null).withMobilephone(null).withWorkphone(null).withFax(null).withEmail(null).withEmail2(null).withBirthyear(null).withGroup("test1"), true);
     }
   }
 
@@ -33,6 +33,7 @@ public class ContactDeletionTests extends TestBase {
     List<ContactData> before = app.contact().list();
     int index = before.size() - 1;
     app.contact().delete(index);
+    app.goTo().homePage();
     List<ContactData> after = app.contact().list();
     Assert.assertEquals(after.size(), before.size() - 1);
 
