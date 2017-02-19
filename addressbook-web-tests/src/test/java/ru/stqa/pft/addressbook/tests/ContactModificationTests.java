@@ -23,7 +23,7 @@ public class ContactModificationTests extends TestBase {
         app.group().create(new GroupData().withName("test1"));
       }
       app.goTo().addNewPage();
-      app.contact().create(new ContactData("Violetta", "Igorevna", "Solonaru", null, null, null, null, null, null, null, null, null, null, null, "test1"), true);
+      app.contact().create(new ContactData().withFirstname("Violetta").withMiddlename("Igorevna").withLastname("Solonaru").withNickname(null).withTitle(null).withCompany(null).withAddress(null).withHomephone(null).withMobilephone(null).withWorkphone(null).withFax(null).withEmail(null).withEmail2(null).withBirthyear(null).withGroup("test1"), true);
     }
   }
 
@@ -32,7 +32,8 @@ public class ContactModificationTests extends TestBase {
     app.goTo().homePage();
     List<ContactData> before = app.contact().list();
     int index = before.size() - 1;
-    ContactData contact = new ContactData(before.get(index).getId(), "Violetta", "Igorevna", "Solonaru", "Violet", "Test engineer", "OTR", "Russian Federation, Sevastopol", "8692 23 96 57", "7978 800 57 64", "8692 55 55 00", "8692 93 78 17", "violetta.solonaru@gmail.com", "solonaru.violetta@otr.ru", "1988", null);
+    ContactData contact = new ContactData()
+            .withId(before.get(index).getId()).withFirstname("Violetta").withMiddlename("Igorevna").withLastname("Solonaru").withNickname("Violet").withTitle("Test engineer").withCompany("OTR").withAddress("Russian Federation, Sevastopol").withHomephone("8692 23 96 57").withMobilephone("7978 800 57 64").withWorkphone("8692 55 55 00").withFax("8692 93 78 17").withEmail("violetta.solonaru@gmail.com").withEmail2("solonaru.violetta@otr.ru").withBirthyear("1988").withGroup(null);
     app.contact().modify(index, contact);
     app.goTo().homePage();
     List<ContactData> after = app.contact().list();
