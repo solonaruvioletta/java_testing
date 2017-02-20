@@ -120,7 +120,9 @@ public class ContactHelper extends HelperBase {
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
       String lastname = data.get(1).getText();
       String firstname = data.get(2).getText();
-      contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
+      String[]phones = data.get(5).getText().split("\n");
+      contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname)
+              .withHomephone(phones[0]).withMobilephone(phones[1]).withWorkphone(phones[2]));
     }
     return new Contacts(contactCache);
   }
