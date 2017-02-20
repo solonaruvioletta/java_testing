@@ -123,11 +123,11 @@ public class ContactHelper extends HelperBase {
       String lastname = data.get(1).getText();
       String firstname = data.get(2).getText();
       String address = data.get(3).getText();
-      String[] emails = data.get(4).getText().split("\n");
+      String allEmails = data.get(4).getText();
       String allPhones = data.get(5).getText();
       contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname)
               .withAddress(address)
-              .withEmail(emails[0]).withEmail2(emails[1]).withEmail3(emails[2])
+              .withAllEmails(allEmails)
               .withAllPhones(allPhones));
     }
     return new Contacts(contactCache);
