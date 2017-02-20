@@ -17,6 +17,7 @@ public class ContactData {
   private String fax;
   private String email;
   private String email2;
+  private String email3;
   private String birthyear;
   private String group;
 
@@ -103,6 +104,11 @@ public class ContactData {
     return this;
   }
 
+  public ContactData withEmail3(String email3) {
+    this.email3 = email3;
+    return this;
+  }
+
   public ContactData withBirthyear(String birthyear) {
     this.birthyear = birthyear;
     return this;
@@ -163,6 +169,10 @@ public class ContactData {
 
   public String getEmail2() {
     return email2;
+  }
+
+  public String getEmail3() {
+    return email3;
   }
 
   public String getBirthyear() {
