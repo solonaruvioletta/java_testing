@@ -54,10 +54,10 @@ public class GroupHelper extends HelperBase {
   }
 
   public void create(GroupData group) {
-   initGroupCreation();
-   fillGroupForm(group);
-   submitGroupCreation();
-   returnToGroupPage();
+    initGroupCreation();
+    fillGroupForm(group);
+    submitGroupCreation();
+    returnToGroupPage();
   }
 
   public void modify(GroupData group) {
