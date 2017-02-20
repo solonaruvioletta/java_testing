@@ -1,7 +1,5 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
@@ -23,7 +21,7 @@ public class ContactAddressTests extends TestBase {
   }
 
   public String cleaned(String address) {
-    return address.replaceAll("\\s","").replaceAll("[-()]","");
-  }
+    return address;
 
+  }
 }
