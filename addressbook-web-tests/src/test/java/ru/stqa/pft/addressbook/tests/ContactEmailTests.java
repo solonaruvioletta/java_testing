@@ -29,7 +29,7 @@ public class ContactEmailTests extends TestBase {
   }
 
   public String cleaned(String email) {
-    return email.replaceAll("\\s","").replaceAll("[()]","");
+    return email.replaceAll("[()]","");
   }
 
 }
