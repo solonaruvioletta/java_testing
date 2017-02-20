@@ -122,9 +122,13 @@ public class ContactHelper extends HelperBase {
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
       String lastname = data.get(1).getText();
       String firstname = data.get(2).getText();
-      String allphones = data.get(5).getText();
+      String address = data.get(3).getText();
+      String[] emails = data.get(4).getText().split("\n");
+      String allPhones = data.get(5).getText();
       contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname)
-              .withAllPhones(allphones));
+              .withAddress(address)
+              .withEmail(emails[0]).withEmail2(emails[1]).withEmail3(emails[2])
+              .withAllPhones(allPhones));
     }
     return new Contacts(contactCache);
   }
