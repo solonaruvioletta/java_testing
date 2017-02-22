@@ -43,8 +43,4 @@ public class ContactEmailTests extends TestBase {
             .stream().filter((s) -> ! s.equals("")).collect(Collectors.joining("\n"));
   }
 
-  public String cleaned(String email) {
-    return email.replaceAll("[()]","");
-  }
-
 }

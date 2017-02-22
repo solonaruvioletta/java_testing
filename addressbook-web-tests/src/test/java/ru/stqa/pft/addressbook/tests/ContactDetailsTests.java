@@ -7,6 +7,10 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.GroupData;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -30,13 +34,28 @@ public class ContactDetailsTests extends TestBase {
   }
 
   @Test
-  public void testContactDetails() {
+  public void testContactEmails() {
     app.goTo().homePage();
     ContactData contact = app.contact().all().iterator().next();
     ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
+    String contactInfoFromDetailsForm = app.contact().infoFromDetailsForm(contact);
 
-    assertThat(contact.getFirstname(), equalTo(contactInfoFromEditForm.getFirstname()));
-    assertThat(contact.getLastname(), equalTo(contactInfoFromEditForm.getLastname()));
+    assertThat(cleanDetails(contactInfoFromDetailsForm), equalTo(mergeEditForm(contactInfoFromEditForm)));
   }
+
+  private String mergeEditForm(ContactData contact) {
+    return Stream.of(contact.getFirstname(), contact.getLastname(), contact.getAddress(),contact.getHomephone(), contact.getMobilephone(), contact.getWorkphone(), contact.getEmail(), contact.getEmail2(), contact.getEmail3()).filter((s)->!s.equals(""))
+            .map(ContactDetailsTests::cleaned)
+            .collect(Collectors.joining());
   }
+
+  public static String cleanDetails(String details) {
+    return details.replaceAll("\\s","").replaceAll("[-()]","").replaceAll("[H: ]","").replaceAll("[M: ]","").replaceAll("[W: ]","");
+  }
+
+  public static String cleaned(String editForm) {
+    return editForm.replaceAll("\\s","").replaceAll("[-()]","");
+  }
+
+}
 
