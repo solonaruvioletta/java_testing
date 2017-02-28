@@ -1,0 +1,38 @@
+<list>
+  <contact>
+    <firstname>firstname 0</firstname>
+    <lastname>lastname 0</lastname>
+    <address>address 0</address>
+    <homephone>home 0</homephone>
+    <mobilephone>mobile 0</mobilephone>
+    <workphone>work 0</workphone>
+    <email>email1 0</email>
+    <email2>email2 0</email2>
+    <email3>email3 0</email3>
+    <group>[none]</group>
+  </contact>
+  <contact>
+    <firstname>firstname 1</firstname>
+    <lastname>lastname 1</lastname>
+    <address>address 1</address>
+    <homephone>home 1</homephone>
+    <mobilephone>mobile 1</mobilephone>
+    <workphone>work 1</workphone>
+    <email>email1 1</email>
+    <email2>email2 1</email2>
+    <email3>email3 1</email3>
+    <group>[none]</group>
+  </contact>
+  <contact>
+    <firstname>firstname 2</firstname>
+    <lastname>lastname 2</lastname>
+    <address>address 2</address>
+    <homephone>home 2</homephone>
+    <mobilephone>mobile 2</mobilephone>
+    <workphone>work 2</workphone>
+    <email>email1 2</email>
+    <email2>email2 2</email2>
+    <email3>email3 2</email3>
+    <group>[none]</group>
+  </contact>
+</list>
