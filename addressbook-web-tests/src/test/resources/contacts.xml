@@ -9,7 +9,7 @@
     <email>email1 0</email>
     <email2>email2 0</email2>
     <email3>email3 0</email3>
-    <group>[none]</group>
+    <group>group</group>
   </contact>
   <contact>
     <firstname>firstname 1</firstname>
@@ -21,7 +21,7 @@
     <email>email1 1</email>
     <email2>email2 1</email2>
     <email3>email3 1</email3>
-    <group>[none]</group>
+    <group>group</group>
   </contact>
   <contact>
     <firstname>firstname 2</firstname>
@@ -33,6 +33,6 @@
     <email>email1 2</email>
     <email2>email2 2</email2>
     <email3>email3 2</email3>
-    <group>[none]</group>
+    <group>group</group>
   </contact>
 </list>
