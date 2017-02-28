@@ -17,6 +17,15 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactCreationTests extends TestBase {
 
+  @DataProvider
+  public Iterator<Object[]> validContacts() {
+    List<Object[]> list = new ArrayList<Object[]>();
+    list.add(new Object[] {new ContactData().withFirstname("Violetta").withMiddlename(null).withLastname("Solonaru").withNickname(null).withPhoto(new File ("src/test/resources/picture.jpg")).withTitle(null).withCompany(null).withAddress("Russian Federation, Sevastopol,AVE October Revolution,26,446").withHomephone("111").withMobilephone("222").withWorkphone("333").withFax(null).withEmail("123@gmail.com").withEmail2("321@gmail.com").withEmail3("231@gmail.com").withBirthyear(null).withGroup("[none]")});
+    list.add(new Object[] {new ContactData().withFirstname("Veta").withMiddlename(null).withLastname("Solonaru").withNickname(null).withPhoto(new File ("src/test/resources/picture.jpg")).withTitle(null).withCompany(null).withAddress("Russian Federation, Sevastopol,AVE October Revolution,26,446").withHomephone("111").withMobilephone("222").withWorkphone("333").withFax(null).withEmail("123@gmail.com").withEmail2("321@gmail.com").withEmail3("231@gmail.com").withBirthyear(null).withGroup("[none]")});
+    list.add(new Object[] {new ContactData().withFirstname("Violet").withMiddlename(null).withLastname("Solonaru").withNickname(null).withPhoto(new File ("src/test/resources/picture.jpg")).withTitle(null).withCompany(null).withAddress("Russian Federation, Sevastopol,AVE October Revolution,26,446").withHomephone("111").withMobilephone("222").withWorkphone("333").withFax(null).withEmail("123@gmail.com").withEmail2("321@gmail.com").withEmail3("231@gmail.com").withBirthyear(null).withGroup("[none]")});
+    return list.iterator();
+  }
+
   @BeforeMethod
   public void ensurePreconditions() {
     app.goTo().groupPage();
@@ -25,18 +34,8 @@ public class ContactCreationTests extends TestBase {
     }
   }
 
-  @DataProvider
-  public Iterator<Object[]> validContacts() {
-    List<Object[]> list = new ArrayList<Object[]>();
-    list.add(new Object[] {new ContactData().withPhoto(new File ("src/test/resources/picture.jpg")).withFirstname("Violetta").withMiddlename(null).withLastname("Solonaru").withNickname(null).withTitle(null).withCompany(null).withAddress("Russian Federation, Sevastopol,AVE October Revolution,26,446").withHomephone("111").withMobilephone("222").withWorkphone("333").withFax(null).withEmail("123@gmail.com").withEmail2("321@gmail.com").withEmail3("231@gmail.com").withBirthyear(null).withGroup("[none]")});
-    list.add(new Object[] {new ContactData().withPhoto(new File ("src/test/resources/picture.jpg")).withFirstname("Veta").withMiddlename(null).withLastname("Solonaru").withNickname(null).withTitle(null).withCompany(null).withAddress("Russian Federation, Sevastopol,AVE October Revolution,26,446").withHomephone("111").withMobilephone("222").withWorkphone("333").withFax(null).withEmail("123@gmail.com").withEmail2("321@gmail.com").withEmail3("231@gmail.com").withBirthyear(null).withGroup("[none]")});
-    list.add(new Object[] {new ContactData().withPhoto(new File ("src/test/resources/picture.jpg")).withFirstname("Violet").withMiddlename(null).withLastname("Solonaru").withNickname(null).withTitle(null).withCompany(null).withAddress("Russian Federation, Sevastopol,AVE October Revolution,26,446").withHomephone("111").withMobilephone("222").withWorkphone("333").withFax(null).withEmail("123@gmail.com").withEmail2("321@gmail.com").withEmail3("231@gmail.com").withBirthyear(null).withGroup("[none]")});
-    return list.iterator();
-  }
-
   @Test(dataProvider = "validContacts")
-  public void testContactCreation(File photo, String firstname, String middlename, String lastname, String nickname, String title, String company, String address,String homephone, String mobilephone, String workphone, String fax, String email, String email2, String email3, String birthyear, String group) {
-    ContactData contact = new ContactData().withPhoto(photo).withFirstname(firstname).withMiddlename(middlename).withLastname(lastname).withNickname(nickname).withTitle(title).withCompany(company).withAddress(address).withHomephone(homephone).withMobilephone(mobilephone).withWorkphone(workphone).withFax(fax).withEmail(email).withEmail2(email2).withEmail3(email3).withBirthyear(birthyear).withGroup(group);
+  public void testContactCreation(ContactData contact) {
     app.goTo().homePage();
     Contacts before = app.contact().all();
     app.goTo().addNewPage();
