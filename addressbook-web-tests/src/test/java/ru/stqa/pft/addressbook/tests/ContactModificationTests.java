@@ -18,10 +18,9 @@ public class ContactModificationTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    app.goTo().homePage();
     if (app.db().contacts().size() == 0) {
-      app.goTo().groupPage();
       if (app.db().groups().size() == 0){
+        app.goTo().groupPage();
         app.group().create(new GroupData().withName("test1"));
       }
       app.goTo().addNewPage();
@@ -31,11 +30,11 @@ public class ContactModificationTests extends TestBase {
 
   @Test
   public void testContactModification() {
-    app.goTo().homePage();
     Contacts before = app.db().contacts();
     ContactData modifiedContact = before.iterator().next();
     ContactData contact = new ContactData()
-            .withId(modifiedContact.getId()).withFirstname("Violetta").withMiddlename("Igorevna").withLastname("Solonaru").withNickname("Violet").withTitle("Test engineer").withCompany("OTR").withAddress("Russian Federation, Sevastopol").withHomephone("8692 23 96 57").withMobilephone("7978 800 57 64").withWorkphone("8692 55 55 00").withFax("8692 93 78 17").withEmail("violetta.solonaru@gmail.com").withEmail2("solonaru.violetta@otr.ru").withBirthyear("1988").withGroup("[none]");
+            .withId(modifiedContact.getId()).withFirstname("Violetta").withMiddlename("Igorevna").withLastname("Solonaru").withNickname("Violet").withTitle("Test engineer").withCompany("OTR").withAddress("Russian Federation, Sevastopol").withHomephone("8692 23 96 57").withMobilephone("7978 800 57 64").withWorkphone("8692 55 55 00").withFax("8692 93 78 17").withEmail("violetta.solonaru@gmail.com").withEmail2("solonaru.violetta@otr.ru").withEmail3("123@gmail.com").withBirthyear("").withGroup(null);
+    app.goTo().homePage();
     app.contact().modify(contact);
     app.goTo().homePage();
     assertThat(app.contact().count(), equalTo(before.size())); //проверка для контроля пользовательского интерфейса

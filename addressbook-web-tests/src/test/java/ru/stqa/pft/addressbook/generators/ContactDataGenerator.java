@@ -8,6 +8,7 @@ import com.google.gson.GsonBuilder;
 import com.thoughtworks.xstream.XStream;
 import ru.stqa.pft.addressbook.model.ContactData;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -74,7 +75,11 @@ public class ContactDataGenerator {
   private void saveAsCsv(List<ContactData> contacts, File file) throws IOException {
     try (Writer writer = new FileWriter(file)) {
       for (ContactData contact : contacts) {
-        writer.write(String.format("%s;%s;%s;%s:%s;%s;%s;%s;%s:%s\n", contact.getFirstname(), contact.getLastname(), contact.getAddress(), contact.getHomephone(), contact.getMobilephone(), contact.getWorkphone(), contact.getEmail(), contact.getEmail2(), contact.getEmail3(), contact.getGroup()));
+        writer.write(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s\n", contact.getFirstname(), contact.getMiddlename(), contact.getLastname(), contact.getNickname(),
+                contact.getCompany(), contact.getTitle(),
+                contact.getAddress(),
+                contact.getHomephone(), contact.getMobilephone(), contact.getWorkphone(), contact.getFax(),
+                contact.getEmail(), contact.getEmail2(), contact.getEmail3(), contact.getBirthyear(), contact.getGroup()));
       }
     }
   }
@@ -82,12 +87,13 @@ public class ContactDataGenerator {
   private List<ContactData> generateContacts(int count) {
     List<ContactData> contacts = new ArrayList<ContactData>();
     for (int i = 0; i < count; i++) {
-      contacts.add(new ContactData().withFirstname(String.format("firstname %s", i)).withLastname(String.format("lastname %s", i))
-              .withAddress(String.format("address %s", i))
-              .withHomephone(String.format("home %s", i)).withMobilephone(String.format("mobile %s", i)).withWorkphone(String.format("work %s", i))
-              .withEmail(String.format("email1 %s", i)).withEmail2(String.format("email2 %s", i)).withEmail3(String.format("email3 %s", i))
-              .withGroup(String.format("group", i)));
+      contacts.add(new ContactData().withFirstname(String.format("firstname %s", i)).withMiddlename(String.format("middlename %s", i)).withLastname(String.format("lastname %s", i)).withNickname(String.format("nickname %s", i))
+              .withCompany(String.format("company %s", i)).withTitle(String.format("title %s", i)).withAddress(String.format("address %s", i))
+              .withHomephone(String.format("home %s", i)).withMobilephone(String.format("mobile %s", i)).withWorkphone(String.format("work %s", i)).withFax(String.format("fax %s", i))
+              .withEmail(String.format("email1 %s", i)).withEmail2(String.format("email2 %s", i)).withEmail3(String.format("email3 %s", i)).withBirthyear(String.format("")).withGroup(String.format("")));
     }
+    JOptionPane.showMessageDialog(null, contacts);
     return contacts;
+
   }
 }
