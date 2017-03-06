@@ -7,6 +7,8 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "addressbook")
@@ -97,8 +99,10 @@ public class ContactData {
   @Column(name = "byear")
   private String birthyear;
 
-  @Transient
-  private String group;
+  @ManyToMany
+  @JoinTable(name = "address_in_groups",
+          joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+  private Set<GroupData> groups = new HashSet<GroupData>();
 
   public String getAllEmails() {
     return allEmails;
@@ -211,10 +215,6 @@ public class ContactData {
     return this;
   }
 
-  public ContactData withGroup(String group) {
-    this.group = group;
-    return this;
-  }
 
   public String getFirstname() {
     return firstname;
@@ -276,8 +276,8 @@ public class ContactData {
     return birthyear;
   }
 
-  public String getGroup() {
-    return "[none]";
+  public Groups getGroups() {
+    return new Groups(groups);
   }
 
   @Override
@@ -305,7 +305,7 @@ public class ContactData {
     if (email3 != null ? !email3.equals(that.email3) : that.email3 != null) return false;
     if (allEmails != null ? !allEmails.equals(that.allEmails) : that.allEmails != null) return false;
     if (birthyear != null ? !birthyear.equals(that.birthyear) : that.birthyear != null) return false;
-    return group != null ? group.equals(that.group) : that.group == null;
+    return groups != null ? groups.equals(that.groups) : that.groups == null;
   }
 
   @Override
@@ -328,7 +328,7 @@ public class ContactData {
     result = 31 * result + (email3 != null ? email3.hashCode() : 0);
     result = 31 * result + (allEmails != null ? allEmails.hashCode() : 0);
     result = 31 * result + (birthyear != null ? birthyear.hashCode() : 0);
-    result = 31 * result + (group != null ? group.hashCode() : 0);
+    result = 31 * result + (groups != null ? groups.hashCode() : 0);
     return result;
   }
 
@@ -353,7 +353,6 @@ public class ContactData {
             ", email3='" + email3 + '\'' +
             ", allEmails='" + allEmails + '\'' +
             ", birthyear='" + birthyear + '\'' +
-            ", group='" + group + '\'' +
             '}';
   }
 }
