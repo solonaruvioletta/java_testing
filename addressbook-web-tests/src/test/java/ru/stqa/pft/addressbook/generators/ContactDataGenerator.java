@@ -90,7 +90,7 @@ public class ContactDataGenerator {
       contacts.add(new ContactData().withFirstname(String.format("firstname %s", i)).withMiddlename(String.format("middlename %s", i)).withLastname(String.format("lastname %s", i)).withNickname(String.format("nickname %s", i))
               .withCompany(String.format("company %s", i)).withTitle(String.format("title %s", i)).withAddress(String.format("address %s", i))
               .withHomephone(String.format("home %s", i)).withMobilephone(String.format("mobile %s", i)).withWorkphone(String.format("work %s", i)).withFax(String.format("fax %s", i))
-              .withEmail(String.format("email1 %s", i)).withEmail2(String.format("email2 %s", i)).withEmail3(String.format("email3 %s", i)).withBirthyear(String.format("")).withGroup(String.format("")));
+              .withEmail(String.format("email1 %s", i)).withEmail2(String.format("email2 %s", i)).withEmail3(String.format("email3 %s", i)).withBirthyear(String.format("")).withGroup(String.format("[none]")));
     }
     JOptionPane.showMessageDialog(null, contacts);
     return contacts;
