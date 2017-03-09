@@ -99,7 +99,7 @@ public class ContactData {
   @Column(name = "byear")
   private String birthyear;
 
-  @ManyToMany
+  @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(name = "address_in_groups",
           joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
   private Set<GroupData> groups = new HashSet<GroupData>();
@@ -353,6 +353,12 @@ public class ContactData {
             ", email3='" + email3 + '\'' +
             ", allEmails='" + allEmails + '\'' +
             ", birthyear='" + birthyear + '\'' +
+            ", groups=" + groups +
             '}';
+  }
+
+  public ContactData inGroup(GroupData group) {
+    groups.add(group);
+    return this;
   }
 }

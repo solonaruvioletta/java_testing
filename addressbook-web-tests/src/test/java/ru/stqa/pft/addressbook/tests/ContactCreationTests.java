@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -63,10 +64,13 @@ public class ContactCreationTests extends TestBase {
 
   @Test(dataProvider = "validContactsFromJson")
   public void testContactCreation(ContactData contact) {
+    Groups groups = app.db().groups();
+    ContactData newContact = new ContactData().withFirstname("Violetta").withMiddlename("Igorevna").withLastname("Solonaru").withNickname(null).withTitle(null).withCompany(null).withAddress(null).withHomephone(null).withMobilephone(null).withWorkphone(null).withFax(null).withEmail(null).withEmail2(null).withBirthyear(null)
+            .inGroup(groups.iterator().next());
     app.goTo().homePage();
     Contacts before = app.db().contacts();
     app.goTo().addNewPage();
-    app.contact().create(contact, true);
+    app.contact().create(newContact, true);
     app.goTo().homePage();
     assertThat(app.contact().count(), equalTo(before.size() + 1));
     Contacts after = app.db().contacts();
@@ -77,11 +81,13 @@ public class ContactCreationTests extends TestBase {
 
   @Test (enabled = false)
   public void testBadContactCreation() {
+    Groups groups = app.db().groups();
+    ContactData newContact = new ContactData().withFirstname("Veta'").withMiddlename("Igorevna").withLastname("Solonaru").withNickname(null).withTitle(null).withCompany(null).withAddress(null).withHomephone(null).withMobilephone(null).withWorkphone(null).withFax(null).withEmail(null).withEmail2(null).withBirthyear(null)
+            .inGroup(groups.iterator().next());
     app.goTo().homePage();
     Contacts before = app.db().contacts();
     app.goTo().addNewPage();
-    ContactData contact = new ContactData().withFirstname("Veta'").withMiddlename("Igorevna").withLastname("Solonaru").withNickname(null).withTitle(null).withCompany(null).withAddress(null).withHomephone(null).withMobilephone(null).withWorkphone(null).withFax(null).withEmail(null).withEmail2(null).withBirthyear(null).withGroup("[none]");
-    app.contact().create(contact, true);
+    app.contact().create(newContact, true);
     app.goTo().homePage();
     assertThat(app.contact().count(), equalTo(before.size()));
     Contacts after = app.db().contacts();

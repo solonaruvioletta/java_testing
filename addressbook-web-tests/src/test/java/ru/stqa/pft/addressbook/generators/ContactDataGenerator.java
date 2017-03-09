@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.thoughtworks.xstream.XStream;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import javax.swing.*;
 import java.io.File;
@@ -15,6 +16,8 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
+
+import static ru.stqa.pft.addressbook.tests.TestBase.app;
 
 /**
  * Created by user on 22.02.2017.
@@ -79,7 +82,7 @@ public class ContactDataGenerator {
                 contact.getCompany(), contact.getTitle(),
                 contact.getAddress(),
                 contact.getHomephone(), contact.getMobilephone(), contact.getWorkphone(), contact.getFax(),
-                contact.getEmail(), contact.getEmail2(), contact.getEmail3(), contact.getBirthyear(), contact.getGroup()));
+                contact.getEmail(), contact.getEmail2(), contact.getEmail3(), contact.getBirthyear(), contact.getGroups()));
       }
     }
   }
@@ -90,7 +93,7 @@ public class ContactDataGenerator {
       contacts.add(new ContactData().withFirstname(String.format("firstname %s", i)).withMiddlename(String.format("middlename %s", i)).withLastname(String.format("lastname %s", i)).withNickname(String.format("nickname %s", i))
               .withCompany(String.format("company %s", i)).withTitle(String.format("title %s", i)).withAddress(String.format("address %s", i))
               .withHomephone(String.format("home %s", i)).withMobilephone(String.format("mobile %s", i)).withWorkphone(String.format("work %s", i)).withFax(String.format("fax %s", i))
-              .withEmail(String.format("email1 %s", i)).withEmail2(String.format("email2 %s", i)).withEmail3(String.format("email3 %s", i)).withBirthyear(String.format("")).withGroup(String.format("[none]")));
+              .withEmail(String.format("email1 %s", i)).withEmail2(String.format("email2 %s", i)).withEmail3(String.format("email3 %s", i)).withBirthyear(String.format("")));
     }
     JOptionPane.showMessageDialog(null, contacts);
     return contacts;
