@@ -104,6 +104,9 @@ public class ContactData {
           joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
   private Set<GroupData> groups = new HashSet<GroupData>();
 
+  @Transient
+  private String group;
+
   public String getAllEmails() {
     return allEmails;
   }
@@ -157,6 +160,15 @@ public class ContactData {
 
   public ContactData withNickname(String nickname) {
     this.nickname = nickname;
+    return this;
+  }
+
+  public String getGroup() {
+    return group;
+  }
+
+  public ContactData withGroup(String group) {
+    this.group = group;
     return this;
   }
 
