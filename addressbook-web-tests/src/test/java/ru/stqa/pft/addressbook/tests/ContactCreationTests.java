@@ -64,14 +64,11 @@ public class ContactCreationTests extends TestBase {
 
   @Test(dataProvider = "validContactsFromJson")
   public void testContactCreation(ContactData newContact) {
-   // Groups groups = app.db().groups();
-    //ContactData newContact = new ContactData().withFirstname("Violetta").withMiddlename("Igorevna").withLastname("Solonaru").withNickname(null).withTitle(null).withCompany(null).withAddress(null).withHomephone(null).withMobilephone(null).withWorkphone(null).withFax(null).withEmail(null).withEmail2(null).withBirthyear(null)
-          // .inGroup(groups.iterator().next());
-
+   Groups groups = app.db().groups();
     app.goTo().homePage();
     Contacts before = app.db().contacts();
     app.goTo().addNewPage();
-    app.contact().create(newContact, true);
+    app.contact ().create ( newContact.inGroup(groups.iterator ().next ()), true );
     app.goTo().homePage();
     assertThat(app.contact().count(), equalTo(before.size() + 1));
     Contacts after = app.db().contacts();
@@ -83,7 +80,7 @@ public class ContactCreationTests extends TestBase {
   @Test (enabled = false)
   public void testBadContactCreation() {
     Groups groups = app.db().groups();
-    ContactData newContact = new ContactData().withFirstname("Veta'").withMiddlename("Igorevna").withLastname("Solonaru").withNickname(null).withTitle(null).withCompany(null).withAddress(null).withHomephone(null).withMobilephone(null).withWorkphone(null).withFax(null).withEmail(null).withEmail2(null).withBirthyear(null)
+    ContactData newContact = new ContactData().withFirstname("Veta'").withMiddlename("Igorevna").withLastname("Solonaru").withNickname(null).withTitle(null).withCompany(null).withAddress(null).withHomephone(null).withMobilephone(null).withWorkphone(null).withFax(null).withEmail(null).withEmail2(null)
             .inGroup(groups.iterator().next());
     app.goTo().homePage();
     Contacts before = app.db().contacts();

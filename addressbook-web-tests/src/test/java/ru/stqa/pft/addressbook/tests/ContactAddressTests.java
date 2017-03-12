@@ -22,7 +22,7 @@ public class ContactAddressTests extends TestBase {
         app.group().create(new GroupData().withName("test1"));
       }
       Groups groups = app.db().groups();
-      ContactData newContact = new ContactData().withFirstname("Violetta").withMiddlename("Igorevna").withLastname("Solonaru").withNickname(null).withTitle(null).withCompany(null).withAddress(null).withHomephone(null).withMobilephone(null).withWorkphone(null).withFax(null).withEmail(null).withEmail2(null).withBirthyear(null)
+      ContactData newContact = new ContactData().withFirstname("Violetta").withMiddlename("Igorevna").withLastname("Solonaru").withNickname(null).withTitle(null).withCompany(null).withAddress(null).withHomephone(null).withMobilephone(null).withWorkphone(null).withFax(null).withEmail(null).withEmail2(null)
               .inGroup(groups.iterator().next());
       app.goTo().addNewPage();
       app.contact().create(newContact, true);

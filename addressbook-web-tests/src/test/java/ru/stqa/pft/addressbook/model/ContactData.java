@@ -95,17 +95,10 @@ public class ContactData {
   @Transient
   private String allEmails;
 
-  @Expose
-  @Column(name = "byear")
-  private String birthyear;
-
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(name = "address_in_groups",
           joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
   private Set<GroupData> groups = new HashSet<GroupData>();
-
-  @Transient
-  private String group;
 
   public String getAllEmails() {
     return allEmails;
@@ -163,15 +156,6 @@ public class ContactData {
     return this;
   }
 
-  public String getGroup() {
-    return group;
-  }
-
-  public ContactData withGroup(String group) {
-    this.group = group;
-    return this;
-  }
-
   public ContactData withTitle(String title) {
     this.title = title;
     return this;
@@ -221,12 +205,6 @@ public class ContactData {
     this.email3 = email3;
     return this;
   }
-
-  public ContactData withBirthyear(String birthyear) {
-    this.birthyear = birthyear;
-    return this;
-  }
-
 
   public String getFirstname() {
     return firstname;
@@ -284,12 +262,32 @@ public class ContactData {
     return email3;
   }
 
-  public String getBirthyear() {
-    return birthyear;
-  }
-
   public Groups getGroups() {
     return new Groups(groups);
+  }
+
+  @Override
+  public String toString() {
+    return "ContactData{" +
+            "id=" + id +
+            ", firstname='" + firstname + '\'' +
+            ", middlename='" + middlename + '\'' +
+            ", lastname='" + lastname + '\'' +
+            ", nickname='" + nickname + '\'' +
+            ", title='" + title + '\'' +
+            ", company='" + company + '\'' +
+            ", address='" + address + '\'' +
+            ", homephone='" + homephone + '\'' +
+            ", mobilephone='" + mobilephone + '\'' +
+            ", workphone='" + workphone + '\'' +
+            ", allPhones='" + allPhones + '\'' +
+            ", fax='" + fax + '\'' +
+            ", email='" + email + '\'' +
+            ", email2='" + email2 + '\'' +
+            ", email3='" + email3 + '\'' +
+            ", allEmails='" + allEmails + '\'' +
+            ", groups=" + groups +
+            '}';
   }
 
   @Override
@@ -316,7 +314,6 @@ public class ContactData {
     if (email2 != null ? !email2.equals(that.email2) : that.email2 != null) return false;
     if (email3 != null ? !email3.equals(that.email3) : that.email3 != null) return false;
     if (allEmails != null ? !allEmails.equals(that.allEmails) : that.allEmails != null) return false;
-    if (birthyear != null ? !birthyear.equals(that.birthyear) : that.birthyear != null) return false;
     return groups != null ? groups.equals(that.groups) : that.groups == null;
   }
 
@@ -339,34 +336,8 @@ public class ContactData {
     result = 31 * result + (email2 != null ? email2.hashCode() : 0);
     result = 31 * result + (email3 != null ? email3.hashCode() : 0);
     result = 31 * result + (allEmails != null ? allEmails.hashCode() : 0);
-    result = 31 * result + (birthyear != null ? birthyear.hashCode() : 0);
     result = 31 * result + (groups != null ? groups.hashCode() : 0);
     return result;
-  }
-
-  @Override
-  public String toString() {
-    return "ContactData{" +
-            "id=" + id +
-            ", firstname='" + firstname + '\'' +
-            ", middlename='" + middlename + '\'' +
-            ", lastname='" + lastname + '\'' +
-            ", nickname='" + nickname + '\'' +
-            ", title='" + title + '\'' +
-            ", company='" + company + '\'' +
-            ", address='" + address + '\'' +
-            ", homephone='" + homephone + '\'' +
-            ", mobilephone='" + mobilephone + '\'' +
-            ", workphone='" + workphone + '\'' +
-            ", allPhones='" + allPhones + '\'' +
-            ", fax='" + fax + '\'' +
-            ", email='" + email + '\'' +
-            ", email2='" + email2 + '\'' +
-            ", email3='" + email3 + '\'' +
-            ", allEmails='" + allEmails + '\'' +
-            ", birthyear='" + birthyear + '\'' +
-            ", groups=" + groups +
-            '}';
   }
 
   public ContactData inGroup(GroupData group) {

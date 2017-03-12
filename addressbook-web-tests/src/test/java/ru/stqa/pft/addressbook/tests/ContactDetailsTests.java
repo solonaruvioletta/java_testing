@@ -26,7 +26,7 @@ public class ContactDetailsTests extends TestBase {
         app.group().create(new GroupData().withName("test1"));
       }
       Groups groups = app.db().groups();
-      ContactData newContact = new ContactData().withFirstname("Violetta").withMiddlename("Igorevna").withLastname("Solonaru").withNickname(null).withTitle(null).withCompany(null).withAddress(null).withHomephone(null).withMobilephone(null).withWorkphone(null).withFax(null).withEmail(null).withEmail2(null).withBirthyear(null)
+      ContactData newContact = new ContactData().withFirstname("Violetta").withMiddlename("Igorevna").withLastname("Solonaru").withNickname(null).withTitle(null).withCompany(null).withAddress(null).withHomephone(null).withMobilephone(null).withWorkphone(null).withFax(null).withEmail(null).withEmail2(null)
               .inGroup(groups.iterator().next());
       app.goTo().addNewPage();
       app.contact().create(newContact, true);
@@ -43,13 +43,13 @@ public class ContactDetailsTests extends TestBase {
   }
 
   private String mergeEditForm(ContactData contact) {
-    return Stream.of(contact.getFirstname(), contact.getLastname(), contact.getAddress(),contact.getHomephone(), contact.getMobilephone(), contact.getWorkphone(), contact.getEmail(), contact.getEmail2(), contact.getEmail3()).filter((s)->!s.equals(""))
+    return Stream.of(contact.getFirstname(),contact.getMiddlename(), contact.getLastname(), contact.getAddress(),contact.getHomephone(), contact.getMobilephone(), contact.getWorkphone(), contact.getEmail(), contact.getEmail2(), contact.getEmail3()).filter((s)->!s.equals(""))
             .map(ContactDetailsTests::cleaned)
             .collect(Collectors.joining());
   }
 
   public static String cleanDetails(String details) {
-    return details.replaceAll("\\s","").replaceAll("[-()]","").replaceAll("[H: ]","").replaceAll("[M: ]","").replaceAll("[W: ]","");
+    return details.replaceAll("\\s","").replaceAll("[-()]","").replaceAll("[H: ]","").replaceAll("[M: ]","").replaceAll("[W: ]","").replaceAll("emberoftest0","");
   }
 
   public static String cleaned(String editForm) {
