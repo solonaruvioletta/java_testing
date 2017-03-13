@@ -105,6 +105,22 @@ public class ContactHelper extends HelperBase {
     acceptContactDeletion();
   }
 
+  public void addToGroup(int contact, int group) {
+    selectGroupById(contact);
+    selectValueInDropDown(By.name("to_group"), String.valueOf(group));
+    clickContact(By.name("add"));
+  }
+
+  public void selectGroupPage(int group) {
+    selectValueInDropDown(By.name("group"), String.valueOf(group));
+  }
+
+  public void deleteFromGroup(ContactInGroupData contact) {
+    selectGroupPage(contact.getGroupId());
+    selectContactById(contact.getContactId());
+    //clickContact(By.xpath("//input[contains(@value,'Add to')]"));
+  }
+
   public boolean isThereAContact() {
     return isElementPresent(By.name("selected[]"));
   }

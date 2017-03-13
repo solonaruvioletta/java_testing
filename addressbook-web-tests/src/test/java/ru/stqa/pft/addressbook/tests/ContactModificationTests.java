@@ -37,7 +37,6 @@ public class ContactModificationTests extends TestBase {
     Contacts before = app.db().contacts();
 
     Groups groups = app.db().groups();
-    JOptionPane.showMessageDialog(null, groups);
     ContactData modifiedContact = before.iterator().next();
     ContactData contact = new ContactData()
             .withId(modifiedContact.getId())
