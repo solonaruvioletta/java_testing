@@ -105,22 +105,6 @@ public class ContactHelper extends HelperBase {
     acceptContactDeletion();
   }
 
-  public void addToGroup(int contact, int group) {
-    selectGroupById(contact);
-    selectValueInDropDown(By.name("to_group"), String.valueOf(group));
-    clickContact(By.name("add"));
-  }
-
-  public void selectGroupPage(int group) {
-    selectValueInDropDown(By.name("group"), String.valueOf(group));
-  }
-
-  public void deleteFromGroup(ContactInGroupData contact) {
-    selectGroupPage(contact.getGroupId());
-    selectContactById(contact.getContactId());
-    //clickContact(By.xpath("//input[contains(@value,'Add to')]"));
-  }
-
   public boolean isThereAContact() {
     return isElementPresent(By.name("selected[]"));
   }
@@ -180,4 +164,33 @@ public class ContactHelper extends HelperBase {
     wd.navigate().back();
     return details;
   }
+
+  public void addMemberToGroup(ContactData contact, String groupValue) {
+    selectContactById(contact.getId());
+    Select group = new Select(wd.findElement(By.name("to_group")));
+    group.selectByValue(groupValue);
+    wd.findElement(By.name("add")).click();
+    wd.findElement(By.cssSelector(".msgbox>i>a")).click();
+    Select groupsList = new Select(wd.findElement(By.name("group")));
+    groupsList.selectByVisibleText("[all]");
+  }
+
+
+  public ContactData deleteMemberFromGroup(Contacts contactFromGroup, String groupValue) {
+    ContactData deletedContact = null;
+    Select groupDel = new Select(wd.findElement(By.name("group")));
+    groupDel.selectByValue(groupValue);
+    deletedContact = contactFromGroup.iterator().next();
+    selectContactById(deletedContact.getId());
+    submitDeleteContactFromGroup();
+    wd.findElement(By.cssSelector(".msgbox>i>a")).click();
+    Select allGroups = new Select(wd.findElement(By.name("group")));
+    allGroups.selectByVisibleText("[all]");
+    return deletedContact;
+  }
+
+  public void submitDeleteContactFromGroup() {
+    click(By.name("remove"));
+  }
+
 }

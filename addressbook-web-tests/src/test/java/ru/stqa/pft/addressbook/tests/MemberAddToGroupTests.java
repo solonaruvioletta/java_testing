@@ -7,10 +7,13 @@ import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
+import static org.testng.Assert.assertTrue;
+
 /**
  * Created by user on 13.03.2017.
  */
-public class ContactDeleteFromGroupTests extends TestBase {
+public class MemberAddToGroupTests extends TestBase {
+
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -27,13 +30,33 @@ public class ContactDeleteFromGroupTests extends TestBase {
     }
   }
 
-  @Test
-  public void testContactDeleteFromGroup() {
-    Contacts contacts = app.db().contacts();
-    app.goTo().homePage();
-    Groups groups = app.db().groups();
 
+
+  @Test
+  public void testMemberAddToGroup() {
+    app.goTo().homePage();
+    Contacts contactsBefore = app.db().contacts();
+    ContactData groupMember = contactsBefore.iterator().next();
+    int groupId = app.db().groups().iterator().next().getId();
+    String groupValue = String.valueOf(groupId);
+    app.contact().addMemberToGroup(groupMember, groupValue);
+    Groups groupsList = app.db().groups();
+    assertTrue(verifyMemberAddToGroup(groupsList, groupMember, groupId));
+  }
+
+  private boolean verifyMemberAddToGroup(Groups groupsList, ContactData memberToGroup, Integer groupId) {
+    boolean memberOfGroup = false;
+    for (GroupData group : groupsList) {
+      GroupData g = new GroupData().withId(group.getId()).withContacts(group.getContacts());
+      if (g.getId() == groupId) {
+        Contacts listCon = g.getContacts();
+        for (ContactData contact : listCon) {
+          if (contact.equals(memberToGroup)) {
+            memberOfGroup = true;
+          }
+        }
+      }
+    }
+    return memberOfGroup;
   }
 }
-
-

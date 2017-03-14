@@ -34,12 +34,17 @@ public class GroupData {
   @Type(type = "text")
   private String footer;
 
-  @ManyToMany(mappedBy = "groups")
+  @ManyToMany(mappedBy = "groups", fetch = FetchType.EAGER)
   private Set<ContactData> contacts = new HashSet<ContactData>();
 
-  public Set<ContactData> getContacts() {
-    return contacts;
-    }
+  //public Set<ContactData> getContacts() {
+    //return contacts;
+   // }
+
+  public Contacts getContacts() {
+    return new Contacts(contacts);
+  }
+
 
 
   //public Contacts getContacts() {return new Contacts(contacts);}
@@ -81,6 +86,7 @@ public class GroupData {
     return footer;
   }
 
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -113,4 +119,8 @@ public class GroupData {
             '}';
   }
 
+  public GroupData withContacts(Set<ContactData> contacts) {
+    this.contacts = contacts;
+    return this;
+  }
 }
