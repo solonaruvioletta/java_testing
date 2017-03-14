@@ -33,37 +33,36 @@ public class MemberDeleteFromGroupTests extends TestBase {
   }
 
   @Test
-  public void testContactDeleteFromGroup() {
+  public void testMemberDeleteFromGroup() {
     app.goTo().homePage();
     Integer groupId = 0;
     Groups groupsList = app.db().groups();
-    ContactData deletedContact = null;
+    ContactData deletedMember = null;
     for (GroupData group : groupsList) {
       if (group.getContacts() != null) {
-        Contacts contactsListInGroup = group.getContacts();
+        Contacts groupMemberList = group.getContacts();
         groupId = group.getId();
         String groupValue = String.valueOf(groupId);
-        deletedContact = app.contact().deleteMemberFromGroup(contactsListInGroup, groupValue);
+        deletedMember = app.contact().deleteMemberFromGroup(groupMemberList, groupValue);
         System.out.println(group);
-        System.out.println(deletedContact);
+        System.out.println(deletedMember);
         break;
       }
     }
     Groups newGroupsList = app.db().groups();
 
-    assertTrue(checkContactDeletedFromGroup(newGroupsList, deletedContact, groupId));
+    assertTrue(verifyMemberDeletedFromGroup(newGroupsList, deletedMember, groupId));
   }
 
-  private boolean checkContactDeletedFromGroup(Groups newGroupsList, ContactData deletedContact, Integer groupId) {
+  private boolean verifyMemberDeletedFromGroup(Groups newGroupsList, ContactData deletedMember, Integer groupId) {
     for (GroupData group : newGroupsList){
       if (group.getId() == groupId){
-        Contacts contactsListInGroup = group.getContacts();
-        for (ContactData contact : contactsListInGroup){
-          if (contact == deletedContact){
+        Contacts groupMemberList = group.getContacts();
+        for (ContactData contact : groupMemberList){
+          if (contact == deletedMember){
             return false;
           }
         }
-        break;
       }
     }
     return true;

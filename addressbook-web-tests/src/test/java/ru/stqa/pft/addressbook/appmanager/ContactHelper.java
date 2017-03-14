@@ -173,23 +173,24 @@ public class ContactHelper extends HelperBase {
     wd.findElement(By.cssSelector(".msgbox>i>a")).click();
     Select groupsList = new Select(wd.findElement(By.name("group")));
     groupsList.selectByVisibleText("[all]");
+    contactCache = null;
   }
 
 
-  public ContactData deleteMemberFromGroup(Contacts contactFromGroup, String groupValue) {
-    ContactData deletedContact = null;
-    Select groupDel = new Select(wd.findElement(By.name("group")));
-    groupDel.selectByValue(groupValue);
-    deletedContact = contactFromGroup.iterator().next();
-    selectContactById(deletedContact.getId());
-    submitDeleteContactFromGroup();
+  public ContactData deleteMemberFromGroup(Contacts groupMember, String groupValue) {
+    ContactData deletedMember = null;
+    Select groupDeleteFrom = new Select(wd.findElement(By.name("group")));
+    groupDeleteFrom.selectByValue(groupValue);
+    deletedMember = groupMember.iterator().next();
+    selectContactById(deletedMember.getId());
+    submitMemberDeleteFromGroup();
     wd.findElement(By.cssSelector(".msgbox>i>a")).click();
     Select allGroups = new Select(wd.findElement(By.name("group")));
     allGroups.selectByVisibleText("[all]");
-    return deletedContact;
+    return deletedMember;
   }
 
-  public void submitDeleteContactFromGroup() {
+  public void submitMemberDeleteFromGroup() {
     click(By.name("remove"));
   }
 
