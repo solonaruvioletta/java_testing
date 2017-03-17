@@ -20,6 +20,7 @@ public class ApplicationManager {
   private WebDriver wd;
 
   private String browser;
+  private RegistrationHelper registrationHelper;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -31,7 +32,11 @@ public class ApplicationManager {
     properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
   }
 
-  public void stop() { wd.quit(); }
+  public void stop() {
+    if (wd != null) {
+      wd.quit();
+    }
+    }
 
   public  HttpSession newSession() {
     return new HttpSession(this);
@@ -42,7 +47,10 @@ public class ApplicationManager {
   }
 
   public RegistrationHelper registration() {
-    return new RegistrationHelper(this);
+    if (registrationHelper == null) {
+      registrationHelper = new RegistrationHelper(this);
+    }
+    return registrationHelper;
   }
 
 
