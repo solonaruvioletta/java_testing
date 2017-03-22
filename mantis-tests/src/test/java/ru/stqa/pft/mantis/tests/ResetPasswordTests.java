@@ -34,7 +34,7 @@ public class ResetPasswordTests extends TestBase{
     app.admin().resetUserPassword();
 
 
-    List<MailMessage> mailMessages = app.mail().waitForMail(2, 10000);
+    List<MailMessage> mailMessages = app.mail().waitForMail(1, 10000);
 
 
     long now = System.currentTimeMillis();

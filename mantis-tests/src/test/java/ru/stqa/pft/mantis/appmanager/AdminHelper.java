@@ -23,22 +23,17 @@ public class AdminHelper extends HelperBase {
   }
 
   public void selectUser() {
-    //click(By.xpath("//button[@id='menu-toggler']"));
-    //click(By.linkText("['управление']"));
-    //click(By.linkText("Управление пользователями"));
-   // wd.findElement(By.cssSelector("input[type = 'submit']")).click();   //By.xpath(".//*[@id='resetUserPassword-form']/fieldset/input[2]")).click();
-    wd.findElement(By.xpath(".//div[@id='sidebar']/ul/li[6]/a/i")).click();
-    wd.findElement(By.xpath(".//*[@id='main-container']/div[2]/div[2]/div/ul/li[2]/a")).click();
-
+    click(By.xpath("//a[contains(.,'управление')]"));
+    click(By.xpath("//a[contains(.,'Управление пользователями')]"));
     List<WebElement> users = wd.findElements(By.xpath("//a[contains(@href,'manage_user_edit_page.php')]"));
-    WebElement user = users.stream().filter((u) -> !(u.getText().equals(app.getProperty("web.adminLogin"))))
+    WebElement selectedUser = users.stream().filter((u) -> !(u.getText().equals(app.getProperty("web.adminLogin"))))
             .findAny().get();
-
+    selectedUser.click();
   }
 
   public User userFromEditForm() {
-    String name = wd.findElement(By.name("Пользователь")).getAttribute("value");
-    String email = wd.findElement(By.name("E-mail")).getAttribute("value");
+    String name = wd.findElement(By.name("username")).getAttribute("value");
+    String email = wd.findElement(By.name("email")).getAttribute("value");
     return new User().withUsername(name).withEmail(email);
   }
 
