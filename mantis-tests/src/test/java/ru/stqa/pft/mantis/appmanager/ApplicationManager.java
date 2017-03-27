@@ -28,6 +28,7 @@ public class ApplicationManager {
   private MailHelper mailHelper;
   private AdminHelper adminHelper;
   private ContainerLifeCycle driver;
+  private SoapHelper soapHelper;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -99,5 +100,12 @@ public class ApplicationManager {
       adminHelper = new AdminHelper(this);
     }
     return adminHelper;
+  }
+
+  public SoapHelper soap() {
+    if (soapHelper == null) {
+      soapHelper = new SoapHelper(this);
+    }
+    return soapHelper;
   }
 }
